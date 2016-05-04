@@ -33,6 +33,22 @@ public class CuisineTest {
     assertEquals(Cuisine.all().size(), 0);
   }
 
+  @Test
+  public void equals_returnsTrueIfBothTypesAreTheSame_True() {
+    Cuisine firstCuisine = new Cuisine("Mexican");
+    Cuisine secondCuisine = new Cuisine("Mexican");
+
+    assertTrue(firstCuisine.equals(secondCuisine));
+  }
+
+  @Test
+  public void save_savesInstanceToDBWithId_True() {
+    Cuisine newCuisine = new Cuisine("American");
+    newCuisine.save();
+    Cuisine savedCuisine = Cuisine.all().get(0);
+    assertEquals(newCuisine.getId(), savedCuisine.getId());
+  }
+
 
   // @Test
   // public void getId_returnsIdOfCuisine_1() {
