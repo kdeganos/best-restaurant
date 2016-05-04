@@ -14,6 +14,10 @@ a {
   background-color: transparent;
 }
 
+.hover {
+  background-color: #b2b2b2;
+}
+
 img {
   max-width: 700px;
   max-height: 700px;
@@ -26,8 +30,8 @@ img {
 }
 
 body {
-  /*background-image: url("http://www.lachamade.com/wp-content/uploads/2013/11/table-restaurant.jpg");*/
   background-image: url("http://www.spanishnyc.com/blog/wp-content/uploads/2014/02/learn-Spanish-at-the-restaurant.jpg");
   background-repeat: no-repeat;
-  /*text-shadow: 2px 2px grey;*/
+  background-attachment: fixed;
+  background-position: center;
 }
