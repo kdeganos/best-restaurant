@@ -10,36 +10,45 @@ import org.sql2o.*; // for DB support
 import org.junit.*; // for @Before and @After
 
 public class AppTest extends FluentTest {
-  // public WebDriver webDriver = new HtmlUnitDriver();
-  //
-  // @Override
-  // public WebDriver getDefaultDriver() {
-  //   return webDriver;
-  // }
-  //
-  // @ClassRule
-  // public static ServerRule server = new ServerRule();
-  //
-  // @Before
-  // public void setUp() {
-  //   DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/doctor_test", null, null);
-  // }
-  //
-  // @After
-  // public void tearDown() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String deleteTasksQuery = "DELETE FROM doctors *;";
-  //     String deleteCategoriesQuery = "DELETE FROM patients *;";
-  //     con.createQuery(deleteTasksQuery).executeUpdate();
-  //     con.createQuery(deleteCategoriesQuery).executeUpdate();
-  //   }
-  // }
-  //
-  // @Test
-  // public void rootTest() {
-  //   goTo("http://localhost:4567/");
-  //   assertThat(pageSource()).contains("Doctor");
-  // }
+  public WebDriver webDriver = new HtmlUnitDriver();
+
+  @Override
+  public WebDriver getDefaultDriver() {
+    return webDriver;
+  }
+
+  @ClassRule
+  public static ServerRule server = new ServerRule();
+
+  @Before
+  public void setUp() {
+    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/restaurants_test", null, null);
+  }
+
+  @After
+  public void tearDown() {
+    try(Connection con = DB.sql2o.open()) {
+      String deleteTasksQuery = "DELETE FROM restaurants *;";
+      String deleteCategoriesQuery = "DELETE FROM cuisines *;";
+      con.createQuery(deleteTasksQuery).executeUpdate();
+      con.createQuery(deleteCategoriesQuery).executeUpdate();
+    }
+  }
+
+  @Test
+  public void rootTest() {
+    goTo("http://localhost:4567/");
+    assertThat(pageSource()).contains("Restaurants");
+  }
+
+  @Test
+  public void routeToAddCuisineIsFunctioning() {
+    goTo("http://localhost:4567/");
+    click("a", withText("Add A New Cuisine"));
+    fill("#cuisineInput").with("Mexican");
+    submit(".btn");
+    assertThat(pageSource()).contains("Here is a list of Cuisines");
+  }
   //
   // @Test
   // public void doctorIdIsSavedToPatient() {

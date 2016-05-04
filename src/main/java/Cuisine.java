@@ -53,4 +53,11 @@ public class Cuisine {
         .executeAndFetchFirst(Cuisine.class);
     }
   }
+
+  public List<Restaurant> allCuisineRestaurants() {
+    String sql = "SELECT id, name, city, rating FROM restaurants WHERE cuisine_id=" + this.getId();
+    try (Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Restaurant.class);
+    }
+  }
 }

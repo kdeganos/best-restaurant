@@ -8,50 +8,58 @@ import static spark.Spark.*;
 
 public class App{
   public static void main(String[] args) {
-    // String layout = "templates/layout.vtl";
-    //
-    // get("/", (request, response) ->{
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //   model.put("template", "templates/index.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-    //
-    // get("/addDoctor", (request, response) -> {
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //   model.put("template", "templates/newDoctor.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-    //
-    // post("/addDoctor", (request, response) ->{
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //   String doctorName = request.queryParams("doctorName");
-    //   String doctorSpeciality = request.queryParams("doctorSpeciality");
-    //   Doctor newDoctor = new Doctor(doctorName, doctorSpeciality);
-    //   newDoctor.save();
-    //   Boolean addedNewDoctor = true;
-    //   model.put("addedNewDoctor", addedNewDoctor);
-    //   model.put("template", "templates/newDoctor.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-    //
-    // get("/addPatient", (request, response) ->{
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //   model.put("template", "templates/newPatient.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-    //
-    // post("/addPatient", (request,response) -> {
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //   String patientName = request.queryParams("patientName");
-    //   String patientBirthday = request.queryParams("patientBirthday");
-    //   Patient newPatient = new Patient(patientName, patientBirthday);
-    //   newPatient.save();
-    //   Boolean addedNewPatient = true;
-    //   model.put("addedNewPatient", addedNewPatient);
-    //   model.put("template", "templates/newPatient.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
-    //
+    String layout = "templates/layout.vtl";
+
+    get("/", (request, response) ->{
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/addCuisine", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/add-cuisine.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/listCuisines", (request, response) ->{
+      Map<String, Object> model = new HashMap<String, Object>();
+      String type = request.queryParams("cuisineInput");
+      Cuisine newCuisine = new Cuisine(type);
+      newCuisine.save();
+      Boolean addedNewCuisine = true;
+
+      model.put("cuisines", Cuisine.all());
+      model.put("addedNewCuisine", addedNewCuisine);
+      model.put("template", "templates/list-cuisines.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/addRestaurant/:id", (request, response) ->{
+      Map<String, Object> model = new HashMap<String, Object>();
+
+      Cuisine cuisine = Cuisine.find(Integer.parseInt(request.params(":id")));
+
+      model.put("cuisine", cuisine);
+      model.put("template", "templates/add-restaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/addRestaurant", (request,response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String restaurantName = request.queryParams("restaurantName");
+      String restaurantCity = request.queryParams("restaurantCity");
+      String restaurantRating = request.queryParams("restaurantRating");
+      int cuisine_id = Integer.parseInt(request.queryParams("cuisine_id"));
+
+      Restaurant newRestaurant = new Restaurant(restaurantName, restaurantCity, restaurantRating, cuisine_id);
+      newRestaurant.save();
+      Boolean addedNewRestaurant = true;
+      model.put("addedNewRestaurant", addedNewRestaurant);
+      model.put("template", "templates/add-restaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     // get("/listPatients", (request, response) -> {
     //   Map<String, Object> model = new HashMap<String, Object>();
     //   model.put("template", "templates/patientList.vtl");
