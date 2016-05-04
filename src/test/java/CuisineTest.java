@@ -11,7 +11,7 @@ public class CuisineTest {
   @After
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM restaurants *;";
+      String sql = "DELETE FROM cuisines *;";
       con.createQuery(sql).executeUpdate();
     }
   }
@@ -49,12 +49,12 @@ public class CuisineTest {
     assertEquals(newCuisine.getId(), savedCuisine.getId());
   }
 
-
-  // @Test
-  // public void getId_returnsIdOfCuisine_1() {
-  //   Cuisine newCuisine = newCuisine("Chinese");
-  //   newCuisine.save();
-  //   assertEquals(1, newCuisine.getId());
-  // }
+  @Test
+  public void find_returnsCorrectInstanceOfCuisine_True() {
+    Cuisine newCuisine = new Cuisine("Thai");
+    newCuisine.save();
+    Cuisine foundCuisine = Cuisine.find(newCuisine.getId());
+    assertTrue(newCuisine.equals(foundCuisine));
+  }
 
 }

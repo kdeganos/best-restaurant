@@ -44,4 +44,13 @@ public class Cuisine {
         .getKey();
     }
   }
+
+  public static Cuisine find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM cuisines WHERE id=:id";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Cuisine.class);
+    }
+  }
 }
