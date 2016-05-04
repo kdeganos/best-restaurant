@@ -1,0 +1,33 @@
+a {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.jumbotron {
+  text-align: center;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 30px;
+}
+
+.hover:hover {
+  background-color: transparent;
+}
+
+img {
+  max-width: 700px;
+  max-height: 700px;
+  margin-bottom: 15px;
+}
+
+.indexLinks {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+body {
+  /*background-image: url("http://www.lachamade.com/wp-content/uploads/2013/11/table-restaurant.jpg");*/
+  background-image: url("http://www.spanishnyc.com/blog/wp-content/uploads/2014/02/learn-Spanish-at-the-restaurant.jpg");
+  background-repeat: no-repeat;
+  /*text-shadow: 2px 2px grey;*/
+}
