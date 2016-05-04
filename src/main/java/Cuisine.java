@@ -25,13 +25,25 @@ public class Cuisine {
     }
   }
 
+  public void removeCuisine() {
+    String sql = "DELETE FROM cuisines WHERE id = :id";
+    try (Connection con = DB.sql2o.open()) {
+      con.createQuery(sql).addParameter("id", this.id).executeUpdate();
+    }
+    String sql2 = "DELETE FROM restaurants WHERE cuisine_id = :id";
+    try (Connection con = DB.sql2o.open()) {
+      con.createQuery(sql2).addParameter("id", this.id).executeUpdate();
+    }
+  }
+
   @Override
   public boolean equals(Object cuisine) {
     if (!(cuisine instanceof Cuisine)) {
       return false;
     } else {
       Cuisine newCuisine = (Cuisine) cuisine;
-      return this.getType().equals(newCuisine.getType());
+      return this.getType().equals(newCuisine.getType()) &&
+             this.getId() == newCuisine.getId();
     }
   }
 

@@ -32,6 +32,10 @@ public class Restaurant {
     return rating;
   }
 
+  public int getCuisineId() {
+    return cuisine_id;
+  }
+
   public static List<Restaurant> all() {
     String sql = "SELECT name, city, rating, cuisine_id, id FROM restaurants";
     try (Connection con = DB.sql2o.open()) {
@@ -45,7 +49,8 @@ public class Restaurant {
       return false;
     } else {
       Restaurant newRestaurant = (Restaurant) restaurant;
-      return this.getName().equals(newRestaurant.getName());
+      return this.getName().equals(newRestaurant.getName()) &&
+             this.getId() == newRestaurant.getId();
     }
   }
 
@@ -70,4 +75,12 @@ public class Restaurant {
         .executeAndFetchFirst(Restaurant.class);
     }
   }
+
+  public void removeRestaurant() {
+    String sql = "DELETE FROM restaurants WHERE id = :id";
+    try (Connection con = DB.sql2o.open()) {
+      con.createQuery(sql).addParameter("id", this.id).executeUpdate();
+    }
+  }
+
 }

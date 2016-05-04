@@ -1,0 +1,16 @@
+<h1>$restaurant.getName()</h1>
+<h2>$cuisine.getType() restaurant</h2><br>
+
+<p>This restaurant is in $restaurant.getCity() and has a rating of $restaurant.getRating().</p>
+
+<a href="/addRestaurant/$cuisine.getId()">Add another $cuisine.getType() Restaurant</a>
+<a href="/addCuisine">Add another Cuisine type</a>
+<a href="/listCuisines">View List of Cuisines</a>
+<a href="/listRestaurants">View List of Restaurants</a>
+
+<br>
+<br>
+<form action="/removeRestaurant/$restaurant.getId()" method="post">
+  <input type="hidden" name="cuisineId" value="$cuisine.getId()">
+  <button type="submit" class="btn btn-danger">Remove Restaurant</button>
+</form>

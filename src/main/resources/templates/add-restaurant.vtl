@@ -9,11 +9,10 @@
 #end
 
 <br>
-#if ($addedNewRestaurant)
-
-<h3>New Restaurant Added Successfully</h3>
-
-#end
+  #if ($addedNewRestaurant)
+    <h3>New Restaurant Added Successfully</h3>
+  #else <br>
+  #end
 <br>
 <h2>Add a Restaurant:</h2>
 
@@ -26,4 +25,13 @@
   <input type="text" name="restaurantRating" id="restaurantRating" placeholder="Enter the rating of the restaurant:">
   <input type="hidden" name="cuisine_id" value=$cuisine.getId()>
   <button type="submit" class="btn btn-info">Add</button>
+</form>
+
+<a href="/listCuisines">View Cuisines</a>
+<a href="/listRestaurants">View Restaurants</a>
+
+<br>
+<br>
+<form action="/removeCuisine/$cuisine.getId()" method="post">
+  <button type="submit" class="btn btn-danger">Remove Cuisine</button>
 </form>
