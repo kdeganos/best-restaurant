@@ -7,6 +7,9 @@ public class Restaurant {
   private String city;
   private int id;
   private int cuisine_id;
+  private int rating=0;
+  private int review_total=0;
+  private int review_counter=0;
 
   public Restaurant(String name, String city, int cuisine_id){
     this.name = name;
@@ -28,6 +31,10 @@ public class Restaurant {
 
   public int getCuisineId() {
     return cuisine_id;
+  }
+
+  public int getRating() {
+    return rating;
   }
 
   public static List<Restaurant> all() {
@@ -87,4 +94,29 @@ public class Restaurant {
     }
   }
 
+  public void updateRating(int reviewRating) {
+    // String reviewRatingString = Integer.toString(reviewRating);
+    // Double reviewRatingFloat = Double.parseDouble(reviewRatingString);
+    review_total += reviewRating;
+    review_counter++;
+    rating = review_total / review_counter;
+
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE restaurants SET rating= :rating WHERE id = :id";
+      con.createQuery(sql, true)
+        .addParameter("rating", this.rating)
+        .addParameter("id", this.id)
+        .executeUpdate();
+      String sql2 = "UPDATE restaurants SET review_counter= :review_counter WHERE id = :id";
+      con.createQuery(sql2, true)
+        .addParameter("review_counter", this.review_counter)
+        .addParameter("id", this.id)
+      .executeUpdate();
+      String sql3 = "UPDATE restaurants SET review_total = :review_total WHERE id = :id";
+      con.createQuery(sql3, true)
+        .addParameter("review_total", this.review_total)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
 }

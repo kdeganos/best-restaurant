@@ -145,6 +145,7 @@ public class App{
 
       Review review = new Review(reviewer, reviewText, rating, restaurant.getId());
       review.save();
+      restaurant.updateRating(rating);
 
       model.put("review", review);
       model.put("restaurant", restaurant);

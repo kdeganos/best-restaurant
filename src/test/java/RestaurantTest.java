@@ -58,4 +58,14 @@ public class RestaurantTest {
     assertTrue(newRestaurant.equals(foundRestaurant));
   }
 
+  @Test
+  public void updateRating_calculatesAndSavesRatingToDB_True() {
+    Restaurant firstRestaurant = new Restaurant("Restaurant 1", "Portland", 1);
+    firstRestaurant.save();
+    firstRestaurant.updateRating(5);
+    firstRestaurant.updateRating(3);
+
+    assertEquals(4, firstRestaurant.getRating());
+  }
+
 }
