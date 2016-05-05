@@ -18,7 +18,7 @@ public class ReviewTest {
 
   @Test
   public void reviews_instantiatesCorrectly() {
-    Review newReview = new Review("Review 1", 4, 1);
+    Review newReview = new Review("Reviewer 1", "Review 1", 4, 1);
     assertEquals(true, newReview instanceof Review);
   }
 
@@ -28,15 +28,15 @@ public class ReviewTest {
   }
 
   @Test
-  public void equals_returnsTrueIfBothNamesAreTheSame_True() {
-    Review firstReview = new Review("Review 1", 4, 1);
-    Review secondReview = new Review("Review 1", 4, 1);
+  public void equals_returnsTrueIfBothReviewsAreTheSame_True() {
+    Review firstReview = new Review("Reviewer 1", "Review 1", 4, 1);
+    Review secondReview = new Review("Reviewer 1", "Review 1", 4, 1);
     assertTrue(firstReview.equals(secondReview));
   }
 
   @Test
   public void save_savesInstanceToDBWithId_True() {
-    Review newReview = new Review("Review 1", 4, 1);
+    Review newReview = new Review("Reviewer 1", "Review 1", 4, 1);
 
     newReview.save();
 
@@ -46,7 +46,7 @@ public class ReviewTest {
 
   @Test
   public void find_returnsCorrectInstanceOfReview_True() {
-    Review newReview = new Review("Review 1", 5, 1);
+    Review newReview = new Review("Reviewer 1", "Review 1", 5, 1);
     newReview.save();
     Review foundReview = Review.find(newReview.getId());
     assertTrue(newReview.equals(foundReview));

@@ -3,15 +3,21 @@ import org.sql2o.*;
 import java.util.Arrays;
 
 public class Review {
+  private String reviewer;
   private String review;
   private int rating;
   private int id;
   private int restaurant_id;
 
-  public Review(String review, int rating, int restaurant_id) {
+  public Review(String reviewer, String review, int rating, int restaurant_id) {
+    this.reviewer = reviewer;
     this.review = review;
     this.rating = rating;
     this.restaurant_id = restaurant_id;
+  }
+
+  public String getReviewer() {
+    return reviewer;
   }
 
   public String getReview() {
@@ -31,7 +37,7 @@ public class Review {
   }
 
   public static List<Review> all() {
-    String sql = "SELECT id, review, rating, restaurant_id FROM reviews";
+    String sql = "SELECT id, reviewer, review, rating, restaurant_id FROM reviews";
     try (Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Review.class);
     }
@@ -48,8 +54,9 @@ public class Review {
   }
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO reviews(review, rating, restaurant_id) VALUES (:review, :rating, :restaurant_id)";
+      String sql = "INSERT INTO reviews(reviewer, review, rating, restaurant_id) VALUES (:reviewer, :review, :rating, :restaurant_id)";
       this.id = (int) con.createQuery(sql, true)
+        .addParameter("reviewer", this.reviewer)
         .addParameter("review", this.review)
         .addParameter("rating", this.rating)
         .addParameter("restaurant_id", this.restaurant_id)

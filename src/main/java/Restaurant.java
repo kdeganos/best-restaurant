@@ -5,14 +5,12 @@ import java.util.Arrays;
 public class Restaurant {
   private String name;
   private String city;
-  private String rating;
   private int id;
   private int cuisine_id;
 
-  public Restaurant(String name, String city, String rating, int cuisine_id){
+  public Restaurant(String name, String city, int cuisine_id){
     this.name = name;
     this.city = city;
-    this.rating = rating;
     this.cuisine_id = cuisine_id;
   }
 
@@ -28,16 +26,12 @@ public class Restaurant {
     return city;
   }
 
-  public String getRating() {
-    return rating;
-  }
-
   public int getCuisineId() {
     return cuisine_id;
   }
 
   public static List<Restaurant> all() {
-    String sql = "SELECT name, city, rating, cuisine_id, id FROM restaurants";
+    String sql = "SELECT name, city, cuisine_id, id FROM restaurants";
     try (Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Restaurant.class);
     }
@@ -56,11 +50,10 @@ public class Restaurant {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO restaurants(name, city, rating, cuisine_id) VALUES (:name, :city, :rating, :cuisine_id)";
+      String sql = "INSERT INTO restaurants(name, city, cuisine_id) VALUES (:name, :city, :cuisine_id)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("city", this.city)
-        .addParameter("rating", this.rating)
         .addParameter("cuisine_id", this.cuisine_id)
         .executeUpdate()
         .getKey();
@@ -77,10 +70,20 @@ public class Restaurant {
   }
 
   public void removeRestaurant() {
-    String sql = "DELETE FROM restaurants WHERE id = :id";
+    String sql = "DELETE FROM reviews WHERE restaurant_id = :id";
     try (Connection con = DB.sql2o.open()) {
       con.createQuery(sql).addParameter("id", this.id).executeUpdate();
     }
+    String sql2 = "DELETE FROM restaurants WHERE id = :id";
+    try (Connection con = DB.sql2o.open()) {
+      con.createQuery(sql2).addParameter("id", this.id).executeUpdate();
+    }
   }
 
+  public List<Review> allRestaurantReviews() {
+    String sql = "SELECT id, reviewer, review, rating FROM reviews WHERE restaurant_id=:id";
+    try (Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).addParameter("id", id).executeAndFetch(Review.class);
+    }
+  }
 }

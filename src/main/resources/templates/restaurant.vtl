@@ -3,8 +3,20 @@
   <h2>$cuisine.getType() restaurant</h2><br>
 </div>
 
-<p>This restaurant is in $restaurant.getCity() and has a rating of $restaurant.getRating().</p>
+<h4>This restaurant is in $restaurant.getCity().</h4>
+<br>
 
+#if ($reviews)
+  <h3>Reviews:</h3>
+  <ul>
+    #foreach ($review in $reviews)
+      <li><a href="/review/$review.getId()">$review.getReviewer()</a></li>
+    #end
+  </ul>
+#end
+
+<a href="/addReview/$restaurant.getId()">Add a review for $restaurant.getName()</a><br>
+<br>
 <a href="/addRestaurant/$cuisine.getId()">Add another $cuisine.getType() Restaurant</a><br>
 <a href="/addCuisine">Add another Cuisine type</a><br>
 <a href="/listCuisines">View List of Cuisines</a><br>

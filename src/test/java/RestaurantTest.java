@@ -18,13 +18,13 @@ public class RestaurantTest {
 
   @Test
   public void restaurant_instantiatesCorrectly() {
-    Restaurant newRestaurant = new Restaurant("Restaurant 1", "Portland", "4.5", 1);
+    Restaurant newRestaurant = new Restaurant("Restaurant 1", "Portland", 1);
     assertEquals(true, newRestaurant instanceof Restaurant);
   }
 
   @Test
   public void getName_returnsNameOfRestaurant_String() {
-    Restaurant newRestaurant = new Restaurant("Restaurant 1", "Portland", "4.5", 1);
+    Restaurant newRestaurant = new Restaurant("Restaurant 1", "Portland", 1);
     assertEquals("Restaurant 1", newRestaurant.getName());
   }
 
@@ -35,16 +35,16 @@ public class RestaurantTest {
 
   @Test
   public void equals_returnsTrueIfBothNamesAreTheSame_True() {
-    Restaurant firstRestaurant = new Restaurant("Restaurant 1", "Portland", "4.5", 1);
-    Restaurant secondRestaurant = new Restaurant("Restaurant 1", "Portland", "4.5", 1);
+    Restaurant firstRestaurant = new Restaurant("Restaurant 1", "Portland", 1);
+    Restaurant secondRestaurant = new Restaurant("Restaurant 1", "Portland", 1);
 
     assertTrue(firstRestaurant.equals(secondRestaurant));
   }
 
   @Test
   public void all_takesRestaurants_2() {
-    Restaurant firstRestaurant = new Restaurant("Restaurant 1", "Portland", "4.5", 1);
-    Restaurant secondRestaurant = new Restaurant("Restaurant 2", "Portland", "5", 1);
+    Restaurant firstRestaurant = new Restaurant("Restaurant 1", "Portland", 1);
+    Restaurant secondRestaurant = new Restaurant("Restaurant 2", "Portland", 1);
     firstRestaurant.save();
     secondRestaurant.save();
     assertEquals(Restaurant.all().size(), 2);
@@ -52,7 +52,7 @@ public class RestaurantTest {
 
   @Test
   public void save_savesInstanceToDBWithId_True() {
-    Restaurant newRestaurant = new Restaurant("Restaurant 1", "Portland", "4.5", 1);
+    Restaurant newRestaurant = new Restaurant("Restaurant 1", "Portland", 1);
 
     newRestaurant.save();
 
@@ -62,7 +62,7 @@ public class RestaurantTest {
 
   @Test
   public void find_returnsCorrectInstanceOfRestaurant_True() {
-    Restaurant newRestaurant = new Restaurant("Restaurant 1", "Portland", "4.5", 1);
+    Restaurant newRestaurant = new Restaurant("Restaurant 1", "Portland", 1);
     newRestaurant.save();
     Restaurant foundRestaurant = Restaurant.find(newRestaurant.getId());
     assertTrue(newRestaurant.equals(foundRestaurant));
