@@ -3,25 +3,30 @@
   <h2>$cuisine.getType() restaurant</h2><br>
 </div>
 
-<h4>This restaurant is in $restaurant.getCity().</h4>
+<h4 class="middle">This restaurant is in $restaurant.getCity().</h4>
 <br>
 
 #if ($reviews)
-  <h3>Reviews:</h3>
+  <h3 class="middle">Reviews:</h3>
   <ul>
     #foreach ($review in $reviews)
-      <li><a href="/review/$review.getId()">$review.getReviewer()</a></li>
+      <li><a class="middle btn btn-primary" href="/review/$review.getId()">$review.getReviewer()</a></li>
     #end
   </ul>
 #end
 
-<a href="/addReview/$restaurant.getId()">Add a review for $restaurant.getName()</a><br>
+<div class="middle">
+  <a class="btn btn-success middle" href="/addReview/$restaurant.getId()">Add a review for $restaurant.getName()</a>
+</div>
 <br>
-<a href="/addRestaurant/$cuisine.getId()">Add another $cuisine.getType() Restaurant</a><br>
-<a href="/addCuisine">Add another Cuisine type</a><br>
-<a href="/listCuisines">View List of Cuisines</a><br>
-<a href="/listRestaurants">View List of Restaurants</a><br>
-
+<div class="middle">
+  <a class="btn btn-success middle" href="/addRestaurant/$cuisine.getId()">Add another $cuisine.getType() Restaurant</a>
+</div>
+<div class="center">
+  <a class="btn btn-primary" href="/addCuisine">Add another Cuisine type</a>
+  <a class="btn btn-primary" href="/listCuisines">View List of Cuisines</a>
+  <a class="btn btn-primary" href="/listRestaurants">View List of Restaurants</a>
+</div>
 <br>
 <br>
 <form action="/removeRestaurant/$restaurant.getId()" method="post">

@@ -26,7 +26,6 @@ public class Cuisine {
   }
 
   public void removeCuisine() {
-
     String sql = "DELETE FROM cuisines WHERE id = :id";
     try (Connection con = DB.sql2o.open()) {
       con.createQuery(sql).addParameter("id", this.id).executeUpdate();

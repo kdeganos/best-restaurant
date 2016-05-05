@@ -100,7 +100,7 @@ public class App{
       Map<String, Object> model = new HashMap<String, Object>();
       Cuisine cuisine = Cuisine.find(Integer.parseInt(request.params(":id")));
       cuisine.removeCuisine();
-      model.put("template", "templates/add-cuisine.vtl");
+      model.put("template", "templates/list-cuisines.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

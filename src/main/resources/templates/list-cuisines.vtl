@@ -3,15 +3,16 @@
 <!-- for each loop -->
 <ul>
   #foreach ($cuisine in $cuisines)
-    <li><a href="/addRestaurant/$cuisine.getId()">$cuisine.getType()</a></li>
+    <li><a class="btn btn-info" href="/addRestaurant/$cuisine.getId()">$cuisine.getType()</a></li>
   #end
 
   #if ($addedNewCuisine)
 
-  <h3>New Cuisine Added Successfully</h3>
+  <h3 class="middle">New Cuisine Added Successfully</h3>
 
   #end
-
-<a href="/listRestaurants">View Restaurants</a>
-<a href="/addCuisine">Add another Cuisine</a><br>
-<a href="/">Go to home page</a>
+<div class="center">
+  <a class="btn btn-primary" href="/listRestaurants">View Restaurants</a>
+  <a class="btn btn-primary" href="/addCuisine">Add another Cuisine</a>
+  <a class="btn btn-primary" href="/">Go to home page</a>
+</div>

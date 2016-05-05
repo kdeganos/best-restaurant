@@ -3,30 +3,32 @@
 #if ($cuisine.allCuisineRestaurants())
   <ul>
   #foreach ($restaurant in $cuisine.allCuisineRestaurants())
-    <li><a href="/restaurant/$restaurant.getId()">$restaurant.getName()</a></li>
+    <li><a class="btn btn-secondary" href="/restaurant/$restaurant.getId()">$restaurant.getName()</a></li>
   #end
   </ul>
 #end
 
 <br>
   #if ($addedNewRestaurant)
-    <h3>New Restaurant Added Successfully</h3>
+    <h3 class="middle">New Restaurant Added Successfully</h3>
   #else <br>
   #end
 <br>
-<h2>Add a Restaurant:</h2>
+<h2 class="middle">Add a Restaurant:</h2>
 
 <form class="form-group" action="/addRestaurant" method="post">
   <label for="restaurantName">Restaurant:</label>
-  <input type="text" name="restaurantName" id="restaurantName" placeholder="Enter the name of the restaurant:">
+  <input type="text" name="restaurantName" id="restaurantName" placeholder="Enter the name:">
   <label for="restaurantCity">City:</label>
-  <input type="text" name="restaurantCity" id="restaurantCity" placeholder="Enter the city of the restaurant:">
+  <input type="text" name="restaurantCity" id="restaurantCity" placeholder="Enter the city:">
   <input type="hidden" name="cuisine_id" value=$cuisine.getId()>
   <button type="submit" class="btn btn-info">Add</button>
 </form>
 
-<a href="/listCuisines">View Cuisines</a><br>
-<a href="/listRestaurants">View Restaurants</a>
+<div class="center">
+  <a class="btn btn-primary" href="/listCuisines">View Cuisines</a>
+  <a class="btn btn-primary" href="/listRestaurants">View Restaurants</a>
+</div>
 
 <br>
 <br>

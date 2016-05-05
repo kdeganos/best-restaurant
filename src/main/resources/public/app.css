@@ -18,20 +18,49 @@ a {
   background-color: #b2b2b2;
 }
 
-img {
-  max-width: 700px;
-  max-height: 700px;
-  margin-bottom: 15px;
-}
-
-.indexLinks {
-  text-align: center;
-  font-size: 1.5em;
-}
-
 body {
-  background-image: url("http://www.spanishnyc.com/blog/wp-content/uploads/2014/02/learn-Spanish-at-the-restaurant.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+  background: url(../background-table.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+form {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  font-weight: bold;
+  text-align: center;
+  margin-left: -28px;
+  margin-bottom: 5px;
+}
+
+.btn-primary {
+  text-align: center;
+}
+
+.btn-success {
+  text-align: center;
+}
+
+.center {
+  position: fixed;
+  bottom: 15vh;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.middle {
+  text-align: center;
+}
+
+.review {
+  padding-top: 13em;
 }
