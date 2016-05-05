@@ -20,20 +20,8 @@ public class AppTest extends FluentTest {
   @ClassRule
   public static ServerRule server = new ServerRule();
 
-  @Before
-  public void setUp() {
-    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/restaurants_test", null, null);
-  }
-
-  @After
-  public void tearDown() {
-    try(Connection con = DB.sql2o.open()) {
-      String deleteTasksQuery = "DELETE FROM restaurants *;";
-      String deleteCategoriesQuery = "DELETE FROM cuisines *;";
-      con.createQuery(deleteTasksQuery).executeUpdate();
-      con.createQuery(deleteCategoriesQuery).executeUpdate();
-    }
-  }
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
 
   @Test
   public void rootTest() {
@@ -46,7 +34,7 @@ public class AppTest extends FluentTest {
     goTo("http://localhost:4567/");
     click("a", withText("Add A New Cuisine"));
     fill("#cuisineInput").with("Mexican");
-    submit(".btn");
+    submit(".btn", withText("Add"));
     assertThat(pageSource()).contains("Here is a list of Cuisines");
   }
   //

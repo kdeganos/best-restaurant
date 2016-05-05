@@ -3,18 +3,8 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class RestaurantTest {
-  @Before
-  public void setUp() {
-    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/restaurants_test", null, null);
-  }
-
-  @After
-  public void tearDown() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM restaurants *;";
-      con.createQuery(sql).executeUpdate();
-    }
-  }
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
 
   @Test
   public void restaurant_instantiatesCorrectly() {

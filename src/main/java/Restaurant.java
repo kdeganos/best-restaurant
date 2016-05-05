@@ -86,4 +86,5 @@ public class Restaurant {
       return con.createQuery(sql).addParameter("id", id).executeAndFetch(Review.class);
     }
   }
+
 }
