@@ -70,7 +70,10 @@ CREATE TABLE restaurants (
     id integer NOT NULL,
     name character varying,
     city character varying,
-    cuisine_id integer
+    cuisine_id integer,
+    rating double precision,
+    review_counter integer,
+    review_total integer
 );
 
 
@@ -159,9 +162,6 @@ ALTER TABLE ONLY reviews ALTER COLUMN id SET DEFAULT nextval('reviews_id_seq'::r
 --
 
 COPY cuisines (id, type) FROM stdin;
-39	Chinese
-40	Thai
-41	Mexican
 \.
 
 
@@ -176,9 +176,7 @@ SELECT pg_catalog.setval('cuisines_id_seq', 41, true);
 -- Data for Name: restaurants; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY restaurants (id, name, city, cuisine_id) FROM stdin;
-31	Golden Dragon	Ogden	39
-32	Thai City	Las Vegas	40
+COPY restaurants (id, name, city, cuisine_id, rating, review_counter, review_total) FROM stdin;
 \.
 
 
@@ -186,7 +184,7 @@ COPY restaurants (id, name, city, cuisine_id) FROM stdin;
 -- Name: restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('restaurants_id_seq', 32, true);
+SELECT pg_catalog.setval('restaurants_id_seq', 39, true);
 
 
 --
@@ -194,11 +192,6 @@ SELECT pg_catalog.setval('restaurants_id_seq', 32, true);
 --
 
 COPY reviews (id, review, rating, restaurant_id, reviewer) FROM stdin;
-7	Test	4	27	Reviewer 2
-8	Review Test	4	27	Jeff
-9	Was not actually served by a golden dragon... Very disappointing!	1	31	Jeff
-10	Was actually served by golden dragon. Above review must have gone on dragons day off!	5	31	Rick
-11	Average food. Good price.	3	32	Jeff
 \.
 
 
@@ -206,7 +199,7 @@ COPY reviews (id, review, rating, restaurant_id, reviewer) FROM stdin;
 -- Name: reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('reviews_id_seq', 11, true);
+SELECT pg_catalog.setval('reviews_id_seq', 30, true);
 
 
 --
