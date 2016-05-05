@@ -100,6 +100,11 @@ public class App{
       Map<String, Object> model = new HashMap<String, Object>();
       Cuisine cuisine = Cuisine.find(Integer.parseInt(request.params(":id")));
       cuisine.removeCuisine();
+
+      boolean removedCuisine = true;
+
+      model.put("removedCuisine", removedCuisine);
+      model.put("cuisines", Cuisine.all());
       model.put("template", "templates/list-cuisines.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -110,6 +115,9 @@ public class App{
       Restaurant restaurant = Restaurant.find(Integer.parseInt(request.params(":id")));
       restaurant.removeRestaurant();
 
+      boolean removedRestaurant = true;
+
+      model.put("removedRestaurant", removedRestaurant);
       model.put("cuisine", cuisine);
       model.put("template", "templates/add-restaurant.vtl");
       return new ModelAndView(model, layout);

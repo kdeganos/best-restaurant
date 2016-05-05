@@ -5,10 +5,21 @@
   #foreach ($cuisine in $cuisines)
     <li><a class="btn btn-info" href="/addRestaurant/$cuisine.getId()">$cuisine.getType()</a></li>
   #end
+</ul>
+
+<div class="row">
+  <hr class="style18 col-xs-6 col-xs-offset-3">
+</div>
 
   #if ($addedNewCuisine)
 
   <h3 class="middle">New Cuisine Added Successfully</h3>
+
+  #end
+
+  #if ($removedCuisine)
+
+  <h3 class="middle">Cuisine Removed Successfully</h3>
 
   #end
 <div class="center">

@@ -3,14 +3,23 @@
 #if ($cuisine.allCuisineRestaurants())
   <ul>
   #foreach ($restaurant in $cuisine.allCuisineRestaurants())
-    <li><a class="btn btn-secondary" href="/restaurant/$restaurant.getId()">$restaurant.getName()</a></li>
+    <li><a class="btn btn-primary" href="/restaurant/$restaurant.getId()">$restaurant.getName()</a></li>
   #end
   </ul>
 #end
 
+<div class="row">
+  <hr class="style18 col-xs-6 col-xs-offset-3">
+</div>
+
 <br>
   #if ($addedNewRestaurant)
     <h3 class="middle">New Restaurant Added Successfully</h3>
+  #else <br>
+  #end
+
+  #if ($removedRestaurant)
+    <h3 class="middle">Restaurant Removed Successfully</h3>
   #else <br>
   #end
 <br>
